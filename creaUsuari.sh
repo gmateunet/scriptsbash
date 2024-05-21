@@ -5,18 +5,18 @@ then
     exit 1
 fi
 
-#TRES PARÀMETRES OBLIGATORIS
-if [[ ${#} -ne 3 ]]
+#DOS PARÀMETRES OBLIGATORIS
+if [[ ${#} -ne 2 ]]
 then
-    echo "has d'introduir 3 paràmetres"
+    echo "has d'introduir 2 paràmetres"
     exit 1
 fi
 #DEMANAM EL NOM COMPLE
 FULL_NAME=${1}
 #DEMANAM L'USERNAME
 USERNAME=${2}
-#DEMANAR EL PASSWORD
-PASSWORD=${3}
+#GENERAR UN PASSWORD EL PASSWORD
+PASSWORD=$(date +%s%N | sha256sum | head -c 8)
 #CREAM L'USUARI
 useradd -c "${FULL_NAME}" -m ${USERNAME} > /dev/null
 #SI LA COMANDA HA FALLAT
@@ -29,11 +29,11 @@ fi
 #APLICAR LA CONTRASENYA
 echo "${USERNAME}:${PASSWORD}" | chpasswd
 #comprovar que el canvi de password ha estat correcte
-if [[ $[?] -ne 0 ]]
+if [[ ${?} -ne 0 ]]
 then
     echo "errada canviant la contrasenya"
     exit 1
 fi
 
-echo "Usuari ${USERNAME} creat correctament"
+echo "Usuari ${USERNAME} PASSWORD: ${PASSWORD}"
 exit 0

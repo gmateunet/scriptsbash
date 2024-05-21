@@ -1,0 +1,14 @@
+#!/bin/bash
+#ESCRIURE UN SCRIPT QUE CALCULI EL FACTORIAL
+#D'UN NUMERO
+ARRIBAR=${1}
+NUMERO=1
+TOTAL=1
+while [[ NUMERO -le ARRIBAR ]]
+do
+    #ANAM FENT ELS CALCULS
+    TOTAL=$(echo "TOTAL*NUMERO" | bc)
+    NUMERO=$((NUMERO+1))
+done
+
+echo "el factorial de $ARRIBAR val $TOTAL"
