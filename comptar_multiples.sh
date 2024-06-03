@@ -4,7 +4,8 @@
 I=1
 FINAL=100
 QUANTS=0
-$((I % 2))do
+while [[ $I -lt $FINAL ]]
+do
     #SI I ES PARELL SUMA 1 A QUANTS
     #modul DE LA DIVISIÓ 
     if [[ $((I % 2)) -eq 0 ]]
